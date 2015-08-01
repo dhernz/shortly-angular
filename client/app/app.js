@@ -38,20 +38,34 @@ angular.module('shortly', [
   };
   return attach;
 })
+
 .factory('Links', function($http){
   var getLinks = function(){
     return $http({
       method: 'GET',
-      url: 'localhost:3000/api/links'
+      url: '/api/links'
+      
     })
     .then(function(resp){
-      
-      return resp.data.links;
+      return resp.data;
     });
   };
   return {
     getLinks: getLinks
   };
+})
+
+.factory('AddLinks', function($http){
+  var addLink = function(){
+    return $http({
+      method: 'POST',
+      url: '/api/links',
+      status: 201
+    })
+    .then(function(){
+
+    })
+  }
 })
 
 .run(function ($rootScope, $location, Auth) {
