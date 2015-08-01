@@ -15,17 +15,32 @@ angular.module('shortly', [
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController'
     })
-    // Your code here
 
-    // We add our $httpInterceptor into the array
+    .when('/shorten', {
+      templateUrl: 'app/shorten/shorten.html',
+      controller: 'ShortenController'
+    })
+
+    .when('/links',{
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController'
+    })
+
+    .otherwise({
+      redirectTo: '/links'
+    })
+
+    // We post our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
 })
+
+
 .factory('AttachTokens', function ($window) {
   // this is an $httpInterceptor
   // its job is to stop all out going request
   // then look in local storage and find the user's token
-  // then add it to the header so the server can validate the request
+  // then post it to the header so the server can validate the request
   var attach = {
     request: function (object) {
       var jwt = $window.localStorage.getItem('com.shortly');
@@ -43,8 +58,7 @@ angular.module('shortly', [
   var getLinks = function(){
     return $http({
       method: 'GET',
-      url: '/api/links'
-      
+      url: '/api/links'      
     })
     .then(function(resp){
       return resp.data;
@@ -55,17 +69,20 @@ angular.module('shortly', [
   };
 })
 
-.factory('AddLinks', function($http){
-  var addLink = function(){
+.factory('PostLinks', function($http){
+  var postLink = function(link){
     return $http({
       method: 'POST',
       url: '/api/links',
-      status: 201
+      data: link
     })
-    .then(function(){
-
+    .then(function(resp){
+      return resp.data;
     })
   }
+  return {
+    postLink: postLink
+  };
 })
 
 .run(function ($rootScope, $location, Auth) {

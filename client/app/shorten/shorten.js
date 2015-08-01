@@ -1,18 +1,10 @@
-angular.module('shortly.shorten', ['ngRoute'])
+angular.module('shortly.shorten', [])
 
-.config(function($routeProvider){
-  $routeProvider
-  .when('/shorten', {
-    templateUrl: 'app/shorten/shorten.html',
-    controller: 'ShortenController'
-  })
-  $routeProvider
-  .otherwise({
-    redirectTo: '/shorten'
-  })
-})
-
-.controller('ShortenController', function ($scope, $location, AddLinks) {
+.controller('ShortenController', function ($scope, $location, PostLinks) {
   $scope.link = {};
-  $scope.addLink = function(){};
+  $scope.addLink = function(){
+    PostLinks.postLink().then(function(link){
+      $scope.link = link;
+    });
+  };
 });

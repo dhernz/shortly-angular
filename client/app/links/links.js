@@ -1,16 +1,4 @@
-angular.module('shortly.links', ['ngRoute'])
-
-.config(function($routeProvider){
-  $routeProvider
-    .when('/links',{
-      templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
-    })
-
-    $routeProvider.otherwise({
-      redirectTo: '/links'
-    })
-})
+angular.module('shortly.links', [])
 
 .controller('LinksController', function ($scope, Links) {
   $scope.data = {};
