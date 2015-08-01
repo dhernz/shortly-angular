@@ -51,6 +51,7 @@ h1 {
 #container {
   clear: both;
   margin-top: 10px;
+  background-color: #eee;
 }
 
 .link {

@@ -11,9 +11,9 @@ angular.module('shortly.auth', [])
       .then(function (token) {
         $window.localStorage.setItem('com.shortly', token);
         $location.path('/links');
-      })
+      }) 
       .catch(function (error) {
-        console.error(error);
+        console.error(error); 
       });
   };
 

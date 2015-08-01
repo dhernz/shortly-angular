@@ -54,36 +54,6 @@ angular.module('shortly', [
   return attach;
 })
 
-.factory('Links', function($http){
-  var getLinks = function(){
-    return $http({
-      method: 'GET',
-      url: '/api/links'      
-    })
-    .then(function(resp){
-      return resp.data;
-    });
-  };
-  return {
-    getLinks: getLinks
-  };
-})
-
-.factory('PostLinks', function($http){
-  var postLink = function(link){
-    return $http({
-      method: 'POST',
-      url: '/api/links',
-      data: link
-    })
-    .then(function(resp){
-      return resp.data;
-    })
-  }
-  return {
-    postLink: postLink
-  };
-})
 
 .run(function ($rootScope, $location, Auth) {
   // here inside the run phase of angular, our services and controllers
